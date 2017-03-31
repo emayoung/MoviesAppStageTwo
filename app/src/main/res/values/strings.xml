@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">MoviesApp</string>
+    <string name="error_message">No Internet Connection Available</string>
+    <string name="sort_by_popular">Sort By Popular</string>
+    <string name="sort_by_toprated">Sort By Top Rated</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="default_movie_duration">120 mins</string>
+    <string name="movie_poster_height">200dp</string>
+    <string name="movie_poster_width">150dp</string>
+    <string name="sixteen_dips">16dp</string>
+    <string name="eight_dips">8dp</string>
+    <string name="text_size_medium">22sp</string>
+    <string name="text_size_small">16sp</string>
+    <string name="text_size_large">42sp</string>
+    <string name="mark_complete">Mark As Complete</string>
+
+
+</resources>
