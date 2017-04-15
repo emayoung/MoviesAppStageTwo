@@ -9,6 +9,7 @@ import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
     @BindView(R.id.rv_movies) RecyclerView recyclerView;
 
     Movies[] movies;
+
+    int position;
 
     @BindView(R.id.error_tv) TextView errorTv;
     @BindView(R.id.progress_bar) ProgressBar progressBar;
@@ -137,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
     public void movieClicked(String moviePosition) {
         //start the details activity here
 
+        position = Integer.parseInt(moviePosition);
         Intent intent = new Intent(MainActivity.this, MovieDetails.class);
         Movies newMovies = movies[Integer.parseInt(moviePosition)];
         intent.putExtra(MainActivity.EXTRA_MOVIES,
@@ -149,6 +153,14 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
         super.onStart();
         PreferenceManager.getDefaultSharedPreferences(this)
                 .registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (position != 0){
+            recyclerView.scrollToPosition(position);
+        }
     }
 
     @Override
@@ -223,6 +235,15 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
                 moviesAdapter.setMovieData(movieData);
 
             }
+
+//            Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    Toast.makeText(MainActivity.this, "about to scroll", Toast.LENGTH_SHORT).show();
+//                    recyclerView.scrollToPosition(11);
+//                }
+//            }, 5000);
         }
 
     }
