@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
 
     Movies[] movies;
 
-    int position;
+    private int position;
 
     @BindView(R.id.error_tv) TextView errorTv;
     @BindView(R.id.progress_bar) ProgressBar progressBar;
@@ -158,6 +158,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
     @Override
     protected void onResume() {
         super.onResume();
+        //check if user has gone to details screen before trying to scroll to position
         if (position != 0){
             recyclerView.scrollToPosition(position);
         }
@@ -236,14 +237,6 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
 
             }
 
-//            Handler handler = new Handler();
-//            handler.postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    Toast.makeText(MainActivity.this, "about to scroll", Toast.LENGTH_SHORT).show();
-//                    recyclerView.scrollToPosition(11);
-//                }
-//            }, 5000);
         }
 
     }
