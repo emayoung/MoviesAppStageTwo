@@ -1,6 +1,7 @@
 package com.android.example.moviesapp.utilities;
 
 import android.net.Uri;
+import android.support.compat.BuildConfig;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,7 +19,7 @@ public final class NetworkUtils {
     private static final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie";
     private static final String API_KEY_PARAM = "api_key";
 
-    private static final String API_KEY = "";
+    private static final String API_KEY = com.android.example.moviesapp.BuildConfig.API_KEY;
 
     public static URL buildUrl(String userMoviePreference){
 

@@ -12,8 +12,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.android.example.moviesapp.utilities.MovieJsonUtils;
+import com.android.example.moviesapp.utilities.Movies;
 import com.android.example.moviesapp.utilities.NetworkUtils;
 import com.bumptech.glide.Glide;
+
+import butterknife.BindString;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by ememobong on 29/03/2017.
@@ -21,10 +26,10 @@ import com.bumptech.glide.Glide;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>{
 
-    private String[] mMovieData;
+    private Movies[] mMovieData;
 
-    MovieAdapterOnClickHandler movieAdapterOnClickHandler;
-    Activity activity;
+    private MovieAdapterOnClickHandler movieAdapterOnClickHandler;
+    private Activity activity;
 
     public interface MovieAdapterOnClickHandler{
         void movieClicked(String movieData);
@@ -54,7 +59,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
 
         holder.setIsRecyclable(true);
 
-        String url = "http://image.tmdb.org/t/p/w185" + MovieJsonUtils.posterPaths[position];
+        String url = activity.getString(R.string.base_image_url) + mMovieData[position].getPosterPaths();
         Glide.with(activity).load(url).into(holder.moviePosterImage);
 
     }
@@ -65,7 +70,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
         return mMovieData.length;
     }
 
-    public void setMovieData(String[] movieData) {
+    public void setMovieData(Movies[] movieData) {
         mMovieData = movieData;
         notifyDataSetChanged();
     }
@@ -85,14 +90,15 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
 
     public class MoviesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        ImageView moviePosterImage;
+        @BindView(R.id.movies_poster_imageview) ImageView moviePosterImage;
 
-        public MoviesViewHolder(View itemView) {
+//        using butter knife made viewholder to recycle views faster, the initial nag disappears and scrolling was smooth
+
+        private MoviesViewHolder(View itemView) {
             super(itemView);
-            moviePosterImage = (ImageView) itemView.findViewById(R.id.movies_poster_imageview);
             itemView.setOnClickListener(this);
+            ButterKnife.bind(this, itemView);
         }
-
 
         @Override
         public void onClick(View view) {
@@ -101,9 +107,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
             movieAdapterOnClickHandler.movieClicked(String.valueOf(position));
         }
     }
-
-
-
 }
 
 
