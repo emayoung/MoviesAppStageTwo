@@ -2,6 +2,7 @@ package com.android.example.moviesapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Point;
 import android.support.v7.widget.RecyclerView;
 import android.view.Display;
@@ -10,11 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.android.example.moviesapp.utilities.MovieJsonUtils;
 import com.android.example.moviesapp.utilities.Movies;
 import com.android.example.moviesapp.utilities.NetworkUtils;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -27,12 +30,13 @@ import butterknife.ButterKnife;
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>{
 
     private Movies[] mMovieData;
+    private Cursor favoritesCursor;
 
     private MovieAdapterOnClickHandler movieAdapterOnClickHandler;
     private Activity activity;
 
     public interface MovieAdapterOnClickHandler{
-        void movieClicked(String movieData);
+        void movieClicked(String movieData, Cursor cursor);
     }
 
     MoviesAdapter(MovieAdapterOnClickHandler listener, Activity activity){
@@ -59,20 +63,50 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
 
         holder.setIsRecyclable(true);
 
-        String url = activity.getString(R.string.base_image_url) + mMovieData[position].getPosterPaths();
-        Glide.with(activity).load(url).into(holder.moviePosterImage);
+        String url = activity.getString(R.string.base_image_url);
+
+        if (MainActivity.favoritesClicked) {
+            if(null == favoritesCursor){
+
+            }
+            favoritesCursor.moveToPosition(position);
+
+            url = url + favoritesCursor.getString(MainActivity.INDEX_MOVIE_POSTER);
+            Glide.with(activity).load(url)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(holder.moviePosterImage);
+
+        }
+        else {
+            url = url + mMovieData[position].getPosterPaths();
+            Glide.with(activity).load(url).into(holder.moviePosterImage);
+        }
+
 
     }
 
     @Override
     public int getItemCount() {
-        if (null == mMovieData) return 0;
+//        check if favorites is clicked
+        if (MainActivity.favoritesClicked) {
+            if (null == favoritesCursor) return 0;
+            return favoritesCursor.getCount();
+        }
+        else if (null == mMovieData) return 0;
         return mMovieData.length;
     }
 
-    public void setMovieData(Movies[] movieData) {
-        mMovieData = movieData;
-        notifyDataSetChanged();
+    public void setMovieData(Movies[] movieData, Cursor cursor) {
+//        check for validity of data either from api or from local database
+        if (MainActivity.favoritesClicked){
+//            use the cursor to populate the recyclerview
+            favoritesCursor = cursor;
+            notifyDataSetChanged();
+        }else{
+            mMovieData = movieData;
+            notifyDataSetChanged();
+        }
+
     }
 
     @Override
@@ -104,7 +138,16 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
         public void onClick(View view) {
 //                get the position that was clicked and notify the mainactivity
             int position = getAdapterPosition();
-            movieAdapterOnClickHandler.movieClicked(String.valueOf(position));
+            if (MainActivity.favoritesClicked){
+                if (favoritesCursor.moveToPosition(position)){
+                    Cursor currentMovieCursor = favoritesCursor;
+                    movieAdapterOnClickHandler.movieClicked(String.valueOf(position), currentMovieCursor);
+                }
+
+            }else {
+                movieAdapterOnClickHandler.movieClicked(String.valueOf(position), null);
+            }
+
         }
     }
 }

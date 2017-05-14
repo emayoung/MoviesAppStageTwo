@@ -23,10 +23,19 @@
         </activity>
         <activity
             android:name=".MovieDetails"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".SettingsActivity"
             android:parentActivityName=".MainActivity">
         </activity>
+        <provider
+            android:authorities="com.android.example.moviesapp"
+            android:name=".data.MovieProvider"
+            android:exported="false" />
+
+        <service
+            android:name=".databaseSync.FavoritesMoviesIntentService"
+            android:exported="false" />
     </application>
 
 </manifest>

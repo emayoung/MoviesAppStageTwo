@@ -1,17 +1,55 @@
 <resources>
     <string name="app_name">MoviesApp</string>
     <string name="error_message">No Internet Connection Available</string>
+    <string name="error_message2">No Movie Added as Favorites</string>
     <string name="one">1</string>
     <string name="two">2</string>
     <string name="default_movie_duration">120 mins</string>
     <string name="mark_complete">Mark As Complete</string>
     <string name="pref_movie_default">popular</string>
+    <string name="pref_movie_top_raed">top_rated</string>
     <string name="pref_movie_key">movie_key</string>
     <string name="pref_movie_label">Sort By</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="settings">Settings</string>
     <string name="base_image_url">http://image.tmdb.org/t/p/w185</string>
+    <string name="backdrop_image_url">http://image.tmdb.org/t/p/w500</string>
+    <string name="youtube_app_itemtype">vnd.youtube:</string>
+    <string name="youtube_web">http://www.youtube.com/watch?v=</string>
     <string name="fav_button_toast_msg">You have added this movie as favorite</string>
+    <string name="trialer_type">type</string>
+    <string name="trialer_key">key</string>
+    <string name="reviewer_name">author</string>
+    <string name="reviewer_comment">content</string>
+    <string name="share_message">Watched an amazing movie. Visit this link to watch. </string>
+    <string name="share_message_two">Watched an amazing movie. Use this link to watch. </string>
+    <string name="trailer_counter">Trailer </string>
+    <string name="trialer">Trailer</string>
 
+    <string name="trailer_swipe_hint">Swipe Right or Left to View Trailers</string>
+    <string name="slash_ten">10</string>
+    <string name="got_it_but">GOT IT</string>
+    <string name="mark_as_fav">Mark As Favorite</string>
+    <string name="bundle_args_synopsis">synopsis</string>
+    <string name="bundle_key_reviewer_names">reviewer_names</string>
+    <string name="bundle_key_reviewer_comment">reviewer_comment</string>
+    <string name="trailer_title">Images</string>
+    <string name="hint_pref_key">hint</string>
+    <string name="bundle_loader_movie_trailers_review_key">movie_details</string>
+    <string name="bundle_loader_parceable_movie_details_key">movie_details</string>
+
+
+    <string name="user_rating">user_rating</string>
+    <string name="movie_id">movie_id</string>
+    <string name="movie_id_backup">movie_id_up</string>
+    <string name="movie_title">movie_title</string>
+    <string name="movie_poster">movie_poster</string>
+    <string name="movie_synopsis">movie_synopsis</string>
+    <string name="release_year">release_year</string>
+    <string name="backdrop">backdrop</string>
+
+    <string name="nav_popular">Popular</string>
+    <string name="nav_top_rated">Top Rated</string>
+    <string name="nav_favorites">Favorites</string>
 
 </resources>

@@ -17,6 +17,8 @@ import java.util.Scanner;
 public final class NetworkUtils {
 
     private static final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie";
+    private static final String TRAILER_PATH = "videos";
+    private static final String REVIEWS_PATH = "reviews";
     private static final String API_KEY_PARAM = "api_key";
 
     private static final String API_KEY = com.android.example.moviesapp.BuildConfig.API_KEY;
@@ -37,6 +39,38 @@ public final class NetworkUtils {
 
         return url;
 
+    }
+    public static URL buildTrailerUrl(String id){
+        Uri.Builder builtUrl = Uri.parse(MOVIE_BASE_URL).buildUpon();
+        builtUrl.appendPath(id);
+        builtUrl.appendPath(TRAILER_PATH);
+        builtUrl.appendQueryParameter(API_KEY_PARAM, API_KEY).build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUrl.toString());
+            return url;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return url;
+    }
+    public static URL buildReviewsUrl(String id){
+        Uri.Builder builtUrl = Uri.parse(MOVIE_BASE_URL).buildUpon();
+        builtUrl.appendPath(id);
+        builtUrl.appendPath(REVIEWS_PATH);
+        builtUrl.appendQueryParameter(API_KEY_PARAM, API_KEY).build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUrl.toString());
+            return url;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return url;
     }
 
     public static String getNetworkResponseFromServer(URL url)  throws IOException {
