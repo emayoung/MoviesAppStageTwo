@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pref_movie_entries">
+        <item>Popular</item>
+        <item>Top Rated</item>
+    </array>
+
+    <array name="pref_movie_values">
+        <item>@string/pref_movie_default</item>
+        <item>@string/pref_movie_top_raed</item>
+    </array>
+</resources>
