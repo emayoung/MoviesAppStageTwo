@@ -12,7 +12,7 @@ import com.android.example.moviesapp.data.MovieContract;
 
 public class FavoritesMoviesIntentService extends IntentService {
 
-    FavoritesMoviesIntentService () {
+    public FavoritesMoviesIntentService () {
         super("FavoritesMoviesIntentService");
     }
     @Override

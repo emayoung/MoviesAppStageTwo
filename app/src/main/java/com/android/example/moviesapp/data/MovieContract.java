@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
  * Created by ememobong on 08/05/2017.
  */
 
-public class MovieContract {
+public final class MovieContract {
 
     /*
     * The "Content authority" is a name for the entire content provider, similar to the

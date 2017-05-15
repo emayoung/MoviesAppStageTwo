@@ -2,6 +2,7 @@ package com.android.example.moviesapp.utilities;
 
 import android.net.Uri;
 import android.support.compat.BuildConfig;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,8 +21,13 @@ public final class NetworkUtils {
     private static final String TRAILER_PATH = "videos";
     private static final String REVIEWS_PATH = "reviews";
     private static final String API_KEY_PARAM = "api_key";
+    private static final String LOG_TAG = NetworkUtils.class.getSimpleName();
 
     private static final String API_KEY = com.android.example.moviesapp.BuildConfig.API_KEY;
+
+    private NetworkUtils(){
+        throw new AssertionError();
+    }
 
     public static URL buildUrl(String userMoviePreference){
 
@@ -67,8 +73,7 @@ public final class NetworkUtils {
             url = new URL(builtUrl.toString());
             return url;
         } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+            Log.e(LOG_TAG, e.getMessage(), e);        }
 
         return url;
     }

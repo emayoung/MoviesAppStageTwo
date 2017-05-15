@@ -147,10 +147,6 @@ public class MovieDetails extends AppCompatActivity implements
                 fetchTrailers();
 
             }
-            else{
-//            make
-
-            }
             trailerPagerAdapter = new TrailerPagerAdapter(MovieDetails.this, movies.getBackdropPaths());
 
             if (isMovieInDatabase(this)){
